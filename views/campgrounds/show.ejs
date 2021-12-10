@@ -1,9 +1,12 @@
 <!-- new stuff -->
 <% layout('layouts/boilerplate')%>
     <link rel="stylesheet" type="text/css" href="/css/stars.css" />
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" />
+
     <div class="row">
         <div class="col-6 ">
             <div class="card mb-3 mt-3">
+                <div id='map' style='width: 400px; height: 300px;'></div>
                 <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <% for(image of camp.images){ %>
@@ -128,3 +131,12 @@
         </div>
 
     </div>
+    <script>
+        const mapboxToken = '<%- process.env.MAPBOX_TOKEN%>';
+        const camp = JSON.parse('<%-JSON.stringify(camp)%>');
+
+
+
+    </script>
+
+    <script src="/js/showMap.js"></script>

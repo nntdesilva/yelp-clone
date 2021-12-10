@@ -28,17 +28,18 @@ const seedDB = async function() {
 			images: [
 				{
 					url:
-						'https://res.cloudinary.com/dfyftbk1x/image/upload/v1638955671/YelpCamp/noi67qlbuhfsyfkmpjr5.jpg',
-					filename: 'YelpCamp/noi67qlbuhfsyfkmpjr5'
+						'https://res.cloudinary.com/dfyftbk1x/image/upload/v1639112816/YelpCamp/yhfml8wdy0g53tzwatqn.jpg',
+					filename: 'YelpCamp/yhfml8wdy0g53tzwatqn'
 				},
 				{
 					url:
-						'https://res.cloudinary.com/dfyftbk1x/image/upload/v1638955672/YelpCamp/gfmaqdlsubjdlfggtyth.jpg',
-					filename: 'YelpCamp/gfmaqdlsubjdlfggtyth'
+						'https://res.cloudinary.com/dfyftbk1x/image/upload/v1639112816/YelpCamp/bskiz4wfjk8nfqtdm9xy.jpg',
+					filename: 'YelpCamp/bskiz4wfjk8nfqtdm9xy'
 				}
 			],
 			location: `${cities[r].city}, ${cities[r].state}`,
-			author: '61ab8af63b091aad87c47337'
+			author: '61ab8af63b091aad87c47337',
+			geometry: { type: 'Point', coordinates: [ 37.61778, 55.75583 ] }
 		});
 		await camp.save();
 	}
