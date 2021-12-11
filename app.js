@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
@@ -17,6 +18,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const mongoSanitize = require('express-mongo-sanitize');
 
 mongoose
 	.connect('mongodb://localhost:27017/yelpDB')
@@ -34,14 +36,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+	mongoSanitize({
+		replaceWith: '_'
+	})
+);
 
 app.use(
 	session({
+		name: 'session',
 		secret: 'thisissecret',
 		resave: false,
 		saveUninitialized: true,
 		cookie: {
 			httpOnly: true,
+			// secure: true,
 			expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
 			maxAge: 1000 * 60 * 60 * 24 * 7
 		}
@@ -55,6 +64,11 @@ app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
 
+app.use(
+	helmet({
+		contentSecurityPolicy: false
+	})
+);
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
